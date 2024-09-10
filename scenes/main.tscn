@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://hhh4nw4xfd1p"]
+
+[ext_resource type="Texture2D" uid="uid://c5wvmhsreoylp" path="res://tilesets/Mobile-FlappyBird-Version12Sprites-ezgif.com-crop.png" id="1_ceynt"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_hije2"]
+[ext_resource type="PackedScene" uid="uid://c0xn0wd84p8p5" path="res://scenes/pipe.tscn" id="2_wmfun"]
+[ext_resource type="PackedScene" uid="uid://bhnrhk5lv0vn1" path="res://scenes/bird.tscn" id="3_86e33"]
+[ext_resource type="PackedScene" uid="uid://88jrgo6o8lun" path="res://scenes/ground.tscn" id="5_ojffb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ha0e2"]
+size = Vector2(373, 666)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_hije2")
+pipe = ExtResource("2_wmfun")
+metadata/_edit_horizontal_guides_ = [-164.0]
+
+[node name="background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(178, 324)
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("1_ceynt")
+
+[node name="Bird" parent="." instance=ExtResource("3_86e33")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(176.5, 323)
+shape = SubResource("RectangleShape2D_ha0e2")
+
+[node name="Ground" parent="." instance=ExtResource("5_ojffb")]
+
+[node name="Ground2" parent="." instance=ExtResource("5_ojffb")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
