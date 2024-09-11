@@ -6,6 +6,7 @@ var game_over : bool
 var scroll
 var score
 const SCROLL_SPEED : int = 2
+const SCROLL_SPEED_GROUND : int = 3.5
 var screen_size : Vector2i
 var ground_height : int
 var new_pipe;
@@ -42,6 +43,7 @@ func _input(event):
 
 func start_game():
 	game_running = true
+	$GameOver.hide()
 	$Bird.flying = true
 	$Bird.flap()
 	$Timer.start()
@@ -103,11 +105,15 @@ func _process(delta: float) -> void:
 		for pipe in pipes_to_remove:
 			pipe_array.erase(pipe)
 
-		scroll += SCROLL_SPEED
+		scroll += SCROLL_SPEED_GROUND
 		if scroll >= screen_size.x:
 			scroll = 0
 		$Ground.position.x = -scroll
 		$Ground2.position.x = -scroll + screen_size.x
+		
+func sleep(seconds):
+	await get_tree().create_timer(seconds).timeout
+
 			
 
 func _on_timer_timeout() -> void:
@@ -115,13 +121,13 @@ func _on_timer_timeout() -> void:
 
 func _on_ground_hit() -> void:
 	$Bird.falling = true
-	$Bird.velocity = Vector2.ZERO
+	$Bird.is_on_ground = true
 	stop_game()
 	
 
 func _on_ground_2_hit() -> void:
 	$Bird.falling = true
-	$Bird.velocity = Vector2.ZERO
+	$Bird.is_on_ground = true
 	stop_game()
 
 

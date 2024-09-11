@@ -33,8 +33,10 @@ position = Vector2(176.5, 323)
 shape = SubResource("RectangleShape2D_ha0e2")
 
 [node name="Ground" parent="." instance=ExtResource("5_ojffb")]
+position = Vector2(-3, 651)
 
 [node name="Ground2" parent="." instance=ExtResource("5_ojffb")]
+position = Vector2(-3, 651)
 
 [node name="ScoreLabel" type="Label" parent="."]
 z_index = 1
