@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://c0xn0wd84p8p5"]
+[gd_scene load_steps=7 format=4 uid="uid://c0xn0wd84p8p5"]
 
 [ext_resource type="Texture2D" uid="uid://cccdv6w5pr5" path="res://tilesets/Mobile - Flappy Bird - Version 12 Sprites.png" id="1_hx3mc"]
 [ext_resource type="Script" path="res://scripts/pipe.gd" id="1_xlwqj"]
@@ -597,7 +597,10 @@ texture_region_size = Vector2i(28, 28)
 [sub_resource type="TileSet" id="TileSet_nknkg"]
 sources/0 = SubResource("TileSetAtlasSource_sk3s1")
 
-[node name="Pipe" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14l2i"]
+size = Vector2(92.6105, 252.828)
+
+[node name="Pipe" type="Area2D" groups=["pipes"]]
 texture_filter = 1
 scale = Vector2(0.5183, 0.611088)
 script = ExtResource("1_xlwqj")
@@ -623,4 +626,11 @@ scale = Vector2(5.96558, 7.29945)
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAsAAAAAAAIAAAACAAsAAAAAAAEAAAACAAsAAAAAAAMAAAACABAAAAAAAP//AAACAAwAAAAAAP7/AAACAAwAAAAAAP3/AAACAAwAAAAAAPz/AAACAAwAAAAAAPv/AAACAAwAAAA=")
 tile_set = SubResource("TileSet_nknkg")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(82.9635, 636.16)
+shape = SubResource("RectangleShape2D_14l2i")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

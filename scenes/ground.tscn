@@ -11,20 +11,22 @@ top_level = true
 texture_filter = 1
 position = Vector2(8, 648)
 scale = Vector2(0.320001, 0.28)
+priority = 1
 script = ExtResource("1_gm3n8")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
-offset_left = -31.0
-offset_top = -250.0
-offset_right = 2425.0
-offset_bottom = 6.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 2456.0
+grow_vertical = 0
 texture = ExtResource("2_y6ryd")
 stretch_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-texture_filter = 1
-position = Vector2(1212.69, -64.75)
+position = Vector2(1221.87, -71.4286)
 shape = SubResource("RectangleShape2D_ntgsg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

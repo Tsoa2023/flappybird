@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://hhh4nw4xfd1p"]
+[gd_scene load_steps=8 format=3 uid="uid://hhh4nw4xfd1p"]
 
 [ext_resource type="Texture2D" uid="uid://c5wvmhsreoylp" path="res://tilesets/Mobile-FlappyBird-Version12Sprites-ezgif.com-crop.png" id="1_ceynt"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hije2"]
 [ext_resource type="PackedScene" uid="uid://c0xn0wd84p8p5" path="res://scenes/pipe.tscn" id="2_wmfun"]
 [ext_resource type="PackedScene" uid="uid://bhnrhk5lv0vn1" path="res://scenes/bird.tscn" id="3_86e33"]
 [ext_resource type="PackedScene" uid="uid://88jrgo6o8lun" path="res://scenes/ground.tscn" id="5_ojffb"]
+[ext_resource type="PackedScene" uid="uid://cke041na6fy1d" path="res://scenes/game_over.tscn" id="6_hqf7l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ha0e2"]
 size = Vector2(373, 666)
@@ -35,4 +36,24 @@ shape = SubResource("RectangleShape2D_ha0e2")
 
 [node name="Ground2" parent="." instance=ExtResource("5_ojffb")]
 
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 115.0
+offset_top = 19.0
+offset_right = 194.0
+offset_bottom = 42.0
+grow_horizontal = 2
+scale = Vector2(1.56, 1.56)
+size_flags_horizontal = 4
+text = "SCRORE: 0"
+horizontal_alignment = 1
+
+[node name="GameOver" parent="." instance=ExtResource("6_hqf7l")]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="hit" from="Ground2" to="." method="_on_ground_2_hit"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
